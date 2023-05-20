@@ -57,32 +57,32 @@ function putStoriesOnPage() {
 
 function putUserStoriesInPage() {
   console.debug("putUserStoriesInPage");
-  $myStoryList.empty();
+  $(`.my-stories-list`).empty();
   if (currentUser.ownStories.length === 0) {
-    const $p = $(`<p>There are no stories added</p>`);
-    $myStoryList.append($p);
+    const $pl = $(`<p>There are no stories added</p>`);
+    $(`.my-stories-list`).append($pl);
   } else {
     for (let story of currentUser.ownStories) {
       const $story = generateStoryMarkup(story);
-      $myStoryList.append($story);
+      $(`.my-stories-list`).append($story);
     }
   }
-  $myStoryList.show();
+  $(`.my-stories-list`).show();
 }
 
 function putFavoritesStoriesOnPage() {
   console.debug("putFavoritesStoriesOnPage");
-  $favStoryList.empty();
+  $(`.fav-stories-list`).empty();
   if (currentUser.favorites.length === 0) {
     let $p = $(`<p> No stories added to favorites!</p>`);
-    $favStoryList.append($p);
+    $(`.fav-stories-list`).append($p);
   } else {
     for (let story of currentUser.favorites) {
       const $story = generateStoryMarkup(story);
-      $favStoryList.append($story);
+      $(`.fav-stories-list`).append($story);
     }
   }
-  $favStoryList.show();
+  $(`.fav-stories-list`).show();
 }
 
 async function toggleStoryFavorites(evt) {

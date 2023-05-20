@@ -48,7 +48,8 @@ function openFavoritesPage(evt) {
   console.debug("openFavoritesPage", evt);
   hidePageComponents();
   putFavoritesStoriesOnPage();
-  $favStoryList.show();
+  $(`#my-stories-list`).hide();
+  $(`.fav-stories-list`).show();
 }
 
 $body.on("click", "#nav-favorites", openFavoritesPage);
@@ -57,7 +58,8 @@ function openMyStoryList(evt) {
   console.debug("openMyStoryList", evt);
   hidePageComponents();
   putUserStoriesInPage();
-  $myStoryList.show();
+  $(`.fav-stories-list`).hide();
+  $(`#my-stories-list`).show();
 }
 
 $body.on("click", "#nav-my-story", openMyStoryList);

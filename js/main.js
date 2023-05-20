@@ -11,8 +11,6 @@ const $storiesList = $(".stories-list");
 const $loginForm = $("#login-form");
 const $signupForm = $("#signup-form");
 const $newStoryForm = $("#story-container");
-const $favStoryList = $("#fav-story-list");
-const $myStoryList = $("#my-story-list");
 
 const $navLogin = $("#nav-login");
 const $navUserProfile = $("#nav-user-profile");

@@ -115,14 +115,4 @@ function updateUIOnUserLogin() {
 
   updateNavOnLogin();
 }
-function putUserStoriesInPage() {
-  console.debug("putUserStoriesInPage");
-  if (currentUser.ownStories.length === 0) {
-    $myStoryList.append(`<p>There are no stories added</p>`);
-  } else {
-    for (let story of currentUser.ownStories) {
-      const $story = generateStoryMarkup(story);
-      $myStoryList.append($story);
-    }
-  }
-}
+

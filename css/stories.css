@@ -1,5 +1,11 @@
 /* Lists of stories */
-
+.star,
+.starf,
+.delete-btn {
+  border: none;
+  background-color: #f6f6ef;
+  position: inherit;
+}
 .stories-list {
   margin: 20px 5px;
 }
@@ -15,7 +21,6 @@
   font-size: 150%;
   margin: 20px 30px;
 }
-
 
 /* Individual stories */
 

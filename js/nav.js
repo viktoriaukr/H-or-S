@@ -39,23 +39,25 @@ function submitLinkClick(evt) {
   console.debug("submitLinkClick", evt);
   hidePageComponents();
   $newStoryForm.show();
+  $allStoriesList.show();
 }
 
-$navSubmit.on("click", submitLinkClick);
+$body.on("click", "#nav-submit", submitLinkClick);
 
-function openFavoritesPage() {
-  console.debug("openFavoritesPage");
+function openFavoritesPage(evt) {
+  console.debug("openFavoritesPage", evt);
   hidePageComponents();
   putFavoritesStoriesOnPage();
   $favStoryList.show();
 }
 
-$navFavorites.on("click", openFavoritesPage);
+$body.on("click", "#nav-favorites", openFavoritesPage);
 
-function openMyStoryList() {
-  console.debug("openMyStoryList");
+function openMyStoryList(evt) {
+  console.debug("openMyStoryList", evt);
   hidePageComponents();
+  putUserStoriesInPage();
   $myStoryList.show();
 }
 
-$navMyStoryList.on("click", openMyStoryList);
+$body.on("click", "#nav-my-story", openMyStoryList);

@@ -82,6 +82,22 @@ class StoryList {
     currentUser.ownStories.unshift(story);
     return story;
   }
+
+  async removeStory(currentUser, storyId) {
+    await axios({
+      method: "DELETE",
+      url: `${BASE_URL}/stories/${storyId}`,
+      data: { token: currentUser.loginToken },
+    });
+    this.stories = this.stories.filter((s) => s.storyId !== storyId);
+
+    currentUser.ownStories = currentUser.ownStories.filter(
+      (s) => s.storyId !== storyId
+    );
+    currentUser.favorites = currentUser.favorites.filter(
+      (s) => s.storyId !== storyId
+    );
+  }
 }
 
 /******************************************************************************
@@ -194,29 +210,31 @@ class User {
       return null;
     }
   }
-  async addStoryToFav(story) {
-    this.favorites.push(story);
-    await addOrRemoveStory("add", story);
-  }
-
-  async removeStoryFromFav(story) {
-    this.favorites = this.favorites.filter(function (s) {
-      s.storyId !== story.storyId;
-    });
-    await addOrRemoveStory("remove", story);
-  }
-
   async addOrRemoveStory(state, story) {
-    let method = state;
+    let method;
     if (state === "add") {
       method = "POST";
     } else if (state === "remove") {
       method = "DELETE";
     }
     await axios({
-      method: method,
+      method,
       url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
-      token: this.loginToken,
+      data: { token: this.loginToken },
     });
+  }
+  async addStoryToFav(story) {
+    this.favorites.push(story);
+    await this.addOrRemoveStory("add", story);
+  }
+
+  async removeStoryFromFav(story) {
+    this.favorites = this.favorites.filter(function (s) {
+      s.storyId !== story.storyId;
+    });
+    await this.addOrRemoveStory("remove", story);
+  }
+  isFavorite(story) {
+    return this.favorites.some((s) => s.storyId === story.storyId);
   }
 }

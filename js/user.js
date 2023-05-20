@@ -109,33 +109,9 @@ function saveUserCredentialsInLocalStorage() {
 
 function updateUIOnUserLogin() {
   console.debug("updateUIOnUserLogin");
-
+  hidePageComponents();
+  putStoriesOnPage();
   $allStoriesList.show();
 
   updateNavOnLogin();
 }
-function putFavoritesStoriesOnPage() {
-  console.debug("putFavoritesStoriesOnPage");
-  for (let story of currentUser.favorites) {
-    const $story = generateStoryMarkup(story);
-    $favStoryList.append($story);
-  }
-}
-
-async function toggleStoryFavorites(evt) {
-  console.debug("toggleStoryFavorites");
-  const $targ = $(evt.target);
-  const $closestLi = $targ.closest("li");
-  const storyId = $closestLi.attr("id");
-  const story = storyList.stories.find((s) => s.storyId === storyId);
-
-  if ($targ.hasClass("fav-story-filled")) {
-    await currentUser.removeStoryFromFav(story);
-    $("#fav-story").hide();
-  } else if ($targ.hasClass("fav-story")) {
-    await currentUser.addStoryToFav(story);
-    $("#fav-story-filled").show();
-  }
-}
-
-$storiesList.on("click", "button", toggleStoryFavorites);

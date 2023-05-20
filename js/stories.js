@@ -25,8 +25,10 @@ function generateStoryMarkup(story) {
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
-      <button id="fav-story">&star;</button>
-      <button class="hidden" id="fav-story-filled">&starf;</button>
+      <button id="delete" class="delete-btn hidden">X</button>
+      <button id="fav-story" class="btn-star star">&#9734</button>
+      <button id="fav-story" class="btn-star starf hidden">&#9733; </button>
+
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -68,4 +70,50 @@ $("#new-story-btn").on("click", async function getAndAddNewStories(evt) {
   $newStoryForm.hide();
 });
 
+function putFavoritesStoriesOnPage() {
+  console.debug("putFavoritesStoriesOnPage");
+  $favStoryList.empty();
+  if (currentUser.favorites.lenght === 0) {
+    $favStoryList.append("<p>No stories added</p>");
+  } else {
+    for (let story of currentUser.favorites) {
+      const $story = generateStoryMarkup(story);
+      $favStoryList.append($story);
+    }
+  }
+  $favStoryList.show();
+}
 
+async function toggleStoryFavorites(evt) {
+  console.debug("toggleStoryFavorites");
+  const $tar = $(evt.target);
+  const $closestLi = $tar.closest("li");
+  const storyId = $closestLi.attr("id");
+  const story = storyList.stories.find((s) => s.storyId === storyId);
+
+  if ($tar.hasClass("starf")) {
+    await currentUser.removeStoryFromFav(story);
+    $(".star").show();
+    $(".starf").hide();
+  } else if ($tar.hasClass("star")) {
+    await currentUser.addStoryToFav(story);
+    $(".starf").show();
+    $(".star").hide();
+  }
+}
+
+$storiesList.on("click", ".btn-star", toggleStoryFavorites);
+
+function putUserStoriesInPage() {
+  console.debug("putUserStoriesInPage");
+  $myStoryList.empty();
+  if (currentUser.ownStories.lenght === 0) {
+    $myStoryList.append(`<p>There are no stories added</p>`);
+  } else {
+    for (let story of currentUser.ownStories) {
+      const $story = generateStoryMarkup(story);
+      $myStoryList.append($story);
+    }
+  }
+  $myStoryList.show();
+}

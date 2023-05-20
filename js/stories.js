@@ -27,7 +27,7 @@ function generateStoryMarkup(story) {
       <li id="${story.storyId}">
       <button id="delete" class="delete-btn hidden">X</button>
       <button id="fav-story" class="btn-star star">&#9734</button>
-      <button id="fav-story" class="btn-star starf hidden">&#9733; </button>
+      <button id="fav-story-filled" class="btn-star starf hidden">&#9733; </button>
 
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
@@ -66,14 +66,14 @@ $("#new-story-btn").on("click", async function getAndAddNewStories(evt) {
     url,
   });
   const story = generateStoryMarkup(newStory);
-  $allStoriesList.append(story);
+  $allStoriesList.prepend(story);
   $newStoryForm.hide();
 });
 
 function putFavoritesStoriesOnPage() {
   console.debug("putFavoritesStoriesOnPage");
   $favStoryList.empty();
-  if (currentUser.favorites.lenght === 0) {
+  if (currentUser.favorites.length === 0) {
     $favStoryList.append("<p>No stories added</p>");
   } else {
     for (let story of currentUser.favorites) {
@@ -103,17 +103,3 @@ async function toggleStoryFavorites(evt) {
 }
 
 $storiesList.on("click", ".btn-star", toggleStoryFavorites);
-
-function putUserStoriesInPage() {
-  console.debug("putUserStoriesInPage");
-  $myStoryList.empty();
-  if (currentUser.ownStories.lenght === 0) {
-    $myStoryList.append(`<p>There are no stories added</p>`);
-  } else {
-    for (let story of currentUser.ownStories) {
-      const $story = generateStoryMarkup(story);
-      $myStoryList.append($story);
-    }
-  }
-  $myStoryList.show();
-}

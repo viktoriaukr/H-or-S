@@ -29,7 +29,6 @@ a:hover {
   text-decoration: underline;
 }
 
-
 /* Site layout */
 
 /* This is the basic box that the main part of the page goes into */
@@ -44,13 +43,13 @@ a:hover {
   display: none;
 }
 
-
 /* Forms */
 
 form {
   display: flex;
   flex-direction: column;
   margin: 8px 18px 0;
+  border-bottom: solid 2px lightgray;
 }
 
 form > * {
@@ -61,12 +60,13 @@ form label {
   font-size: 0.9rem;
   font-weight: 700;
   display: inline-block;
-  width: 3.5rem;
+  width: 3rem;
   text-align: right;
   margin-right: 5px;
 }
 
 form input {
+  margin-right: 5px;
   font-size: 0.8rem;
   border: none;
   border-radius: 2px;
@@ -105,7 +105,6 @@ form > hr {
 .login-input label {
   width: 70px;
 }
-
 
 /* responsive queries for tightening things up for mobile. */
 

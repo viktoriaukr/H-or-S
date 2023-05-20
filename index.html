@@ -17,7 +17,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Hack or Snooze//</title>
+    <title>Hack or Snooze</title>
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
@@ -35,9 +35,9 @@
     <nav>
       <div class="navbar-brand">
         <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
-        <a class="nav-link" href="#" id="nav-submit">| Submit</a>
-        <a class="nav-link" href="#" id="nav-favorites">| Favorites</a>
-        <a class="nav-link" href="#" id="nav-my-story">| My Stories</a>
+        <a class="nav-link" href="#" id="nav-submit">Submit</a>
+        <a class="nav-link" href="#" id="nav-favorites"> Favorites</a>
+        <a class="nav-link" href="#" id="nav-my-story"> My Stories</a>
       </div>
       <div class="nav-right">
         <a class="nav-link" href="#" id="nav-login">login/signup</a>
@@ -51,24 +51,28 @@
       <!-- loading message (removed by JS after stories loaded) -->
       <div id="stories-loading-msg">Loading&hellip;</div>
       <form class="hidden" id="story-container">
-        <div>
-          <label for="story-author">
-            Author:
-            <input type="text" id="story-author" placeholder="author name"
-          /></label>
-        </div>
-        <div>
-          <label for="story-title">
-            Title:
-            <input type="text" id="story-title" placeholder="story title"
-          /></label>
-        </div>
-        <div>
-          <label for="story-url">
-            URL: <input type="url" id="story-url" placeholder="story url"
-          /></label>
-        </div>
-        <div><input type="submit" id="new-story-btn" /></div>
+        <label for="story-author"
+          >author:<input
+            type="text"
+            id="story-author"
+            required
+            placeholder="author name"
+        /></label>
+        <label for="story-title"
+          >title:<input
+            type="text"
+            id="story-title"
+            required
+            placeholder="story title"
+        /></label>
+        <label for="story-url"
+          >url:<input
+            type="url"
+            id="story-url"
+            required
+            placeholder="story url"
+        /></label>
+        <button id="new-story-btn">submit</button>
       </form>
 
       <!-- List of all stories -->

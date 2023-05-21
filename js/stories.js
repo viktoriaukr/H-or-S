@@ -23,10 +23,14 @@ function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
 
   const hostName = story.getHostName();
+  const isFavorite = currentUser.isFavorite(story);
+  const starType = isFavorite ? "fas" : "far";
   return $(`
       <li id="${story.storyId}">
       <button id="delete" class="delete-btn hidden">&#10008;</button>
-      <i class="fas fa-star fa-star-o"></i>
+      <span class="star">
+      <i class="${starType} fa-star" aria-hidden="true"></i>
+      </span>
 
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
@@ -92,14 +96,16 @@ async function toggleStoryFavorites(evt) {
   const storyId = $closestLi.attr("id");
   const story = storyList.stories.find((s) => s.storyId === storyId);
 
-  if ($tar.hasClass("starf")) {
+  if ($tar.hasClass("fas")) {
     await currentUser.removeStoryFromFav(story);
-  } else if ($tar.hasClass("star")) {
+    $tar.closest("i").toggleClass("fas far");
+  } else {
     await currentUser.addStoryToFav(story);
+    $tar.closest("i").toggleClass("fas far");
   }
 }
 
-$storiesList.on("click", ".star-container", toggleStoryFavorites);
+$storiesList.on("click", ".star", toggleStoryFavorites);
 
 $("#new-story-btn").on("click", async function getAndAddNewStories(evt) {
   evt.preventDefault();

@@ -10,6 +10,8 @@ function navAllStories(evt) {
   console.debug("navAllStories", evt);
   hidePageComponents();
   putStoriesOnPage();
+  $(`.fav-stories-list`).hide();
+  $(`#my-stories-list`).hide();
 }
 
 $body.on("click", "#nav-all", navAllStories);
@@ -40,6 +42,8 @@ function submitLinkClick(evt) {
   hidePageComponents();
   $newStoryForm.show();
   $allStoriesList.show();
+  $(`.fav-stories-list`).hide();
+  $(`#my-stories-list`).hide();
 }
 
 $body.on("click", "#nav-submit", submitLinkClick);
@@ -57,7 +61,7 @@ $body.on("click", "#nav-favorites", openFavoritesPage);
 function openMyStoryList(evt) {
   console.debug("openMyStoryList", evt);
   hidePageComponents();
-  putUserStoriesInPage();
+  putUserStoriesOnPage();
   $(`.fav-stories-list`).hide();
   $(`#my-stories-list`).show();
 }

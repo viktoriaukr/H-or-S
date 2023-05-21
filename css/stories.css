@@ -1,9 +1,25 @@
 /* Lists of stories */
-.star,
-.starf,
-.delete-btn {
-  border: none;
-  background-color: #f6f6ef;
+.star-container {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  font-size: 16px;
+  border: 1px solid black;
+}
+.star-container:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: ‘★’;
+  color: lightgray;
+}
+.star-container:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: ‘★’;
+  color: gold;
+  overflow: hidden;
 }
 .stories-list {
   margin: 20px 5px;

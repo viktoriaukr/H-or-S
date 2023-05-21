@@ -25,9 +25,8 @@ function generateStoryMarkup(story) {
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
-      <button id="delete" class="delete-btn hidden">X</button>
-      <button id="fav-story" class="btn-star star">&#9734</button>
-      <button id="fav-story-filled" class="btn-star starf hidden">&#9733; </button>
+      <button id="delete" class="delete-btn hidden">&#10008;</button>
+      <div class="star-container">★</div>
 
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
@@ -55,7 +54,7 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
 
-function putUserStoriesInPage() {
+function putUserStoriesOnPage() {
   console.debug("putUserStoriesInPage");
   $(`.my-stories-list`).empty();
   if (currentUser.ownStories.length === 0) {
@@ -65,6 +64,7 @@ function putUserStoriesInPage() {
     for (let story of currentUser.ownStories) {
       const $story = generateStoryMarkup(story);
       $(`.my-stories-list`).append($story);
+      $(`.delete-btn`).show();
     }
   }
   $(`.my-stories-list`).show();
@@ -103,7 +103,8 @@ async function toggleStoryFavorites(evt) {
   }
 }
 
-$storiesList.on("click", ".btn-star", toggleStoryFavorites);
+$storiesList.on("click", ".star-container", toggleStoryFavorites);
+
 $("#new-story-btn").on("click", async function getAndAddNewStories(evt) {
   evt.preventDefault();
   const author = $("#story-author").val();
@@ -116,6 +117,15 @@ $("#new-story-btn").on("click", async function getAndAddNewStories(evt) {
   });
   const story = generateStoryMarkup(newStory);
   $allStoriesList.prepend(story);
-  $myStoryList.prepend(story);
   $newStoryForm.hide();
 });
+
+async function removeStoryFromUserStoryList(evt) {
+  const $tar = $(evt.target);
+  const $closestLi = $tar.closest("li");
+  const storyId = $closestLi.attr("id");
+  await storyList.removeStory(currentUser, storyId);
+  putUserStoriesOnPage();
+}
+
+$(`.my-stories-list`).on("click", ".delete-btn", removeStoryFromUserStoryList);

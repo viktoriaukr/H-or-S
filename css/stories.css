@@ -57,3 +57,9 @@
 .story-user {
   display: block;
 }
+
+/* Styling the star */
+
+.star {
+  content: "\F588";
+}

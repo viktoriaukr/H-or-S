@@ -26,7 +26,7 @@ function generateStoryMarkup(story) {
   return $(`
       <li id="${story.storyId}">
       <button id="delete" class="delete-btn hidden">&#10008;</button>
-      <div class="star-container">★</div>
+      <i class="fas fa-star fa-star-o"></i>
 
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
@@ -94,12 +94,8 @@ async function toggleStoryFavorites(evt) {
 
   if ($tar.hasClass("starf")) {
     await currentUser.removeStoryFromFav(story);
-    $(".star").show();
-    $(".starf").hide();
   } else if ($tar.hasClass("star")) {
     await currentUser.addStoryToFav(story);
-    $(".starf").show();
-    $(".star").hide();
   }
 }
 
